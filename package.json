@@ -1,0 +1,27 @@
+{
+  "name": "tinderbe",
+  "version": "1.0.0",
+  "description": "tinder for devs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kautilya-23/TinderBE.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript"
+  ],
+  "author": "Kautilya Sathwara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kautilya-23/TinderBE/issues"
+  },
+  "homepage": "https://github.com/Kautilya-23/TinderBE#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
