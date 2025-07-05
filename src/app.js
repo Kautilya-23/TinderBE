@@ -2,13 +2,20 @@ const express = require("express");
 
 const app = express();
 
-app.use("/", (req,res) => {
-    res.send("OKK just for check")
+// order of the routes is matter
+
+app.get("/user", (req, res) => {
+    res.send({firstname:"Kautilya", lastname:"Sathwara"})
 });
 
-app.use("/home", (req,res) => {
-    res.send("Hello from the home route")
+app.post("/user", (req, res) => {
+    // saving data to DB
+    res.send("Data successfully saved to database!")
 });
+
+app.delete("/user", (req, res) => {
+    res.send("Deleted Successfully!")
+})
 
 app.use("/test", (req,res) => {
     res.send("Hello from the test route")
