@@ -1,28 +1,35 @@
 const express = require("express");
-const { adminAuth, userAuth } = require("../middlewares/auth");
+const connectDB = require("./config/database");
 
+const User = require("./models/user")
 const app = express();
 
-// order of the routes is matter
-app.use("/admin", adminAuth);
-app.use("/user", userAuth);
+app.post("/signup", async (req, res) => {
+    // Creating a new instance of a user model
+    const user = new User({
+        firstname: "Kautilya",
+        lastname: "Sathwara",
+        emailId: "kautilya@sathwara.com",
+        password: "kas@123",
+    })
 
-app.post("/user/login", (req, res) => {
-    res.send("User is logged in");
-},);
-
-app.get("/user/data", (req, res) => {
-    res.send("User Data sent");
-})
-
-app.get("/admin/getAllData", (req, res) => {
-    res.send("Getting the All Data");
-},);
-
-app.get("/admin/deleteUser", (req, res) => {
-    res.send("Delete the user");
-},);
-
-app.listen(7777, () => {
-    console.log("Server listening the port 7777....");
+    try{
+        await user.save();
+        res.send("User Added Successfully");
+    } catch (err) {
+            res.status(400).send("Error saving the user:" + err.message);
+        }
+    
 });
+
+connectDB()
+    .then(() => {
+        console.log("Database connection established...");
+        app.listen(7777, () => {
+        console.log("Server listening the port 7777....");
+});
+    })
+    .catch((err) => {
+        console.error("Database can not be connected!!");
+    });
+
