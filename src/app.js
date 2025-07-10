@@ -43,6 +43,58 @@ app.get("/feed", async (req, res) => {
     }
 });
 
+// get user by id
+app.get("/id", async (req, res) => {
+    const userId = req.body._id;
+    try {
+        const user = await User.findById({_id: userId});
+        // const user = await User.findById(userId);
+        if(!user){
+            res.status(400).send("User not found");
+        } else {
+            res.send(user);
+        }
+    } catch (err) {
+        res.status(400).send("Something went wrong!");
+    }
+});
+
+// Delete user by Id
+app.delete("/user", async (req, res) => {
+    const userId = req.body.userId;
+    try {
+        // const user = await User.findByIdAndDelete({_id: userId});
+        const user = await User.findByIdAndDelete(userId);
+        if(!user){
+            res.status(400).send("User not found");
+        } else {
+            res.send("User deleted successfully");
+        }
+    } catch (err) {
+        res.status(400).send("Something went wrong!");
+    }
+});
+
+// Update user by Id
+app.patch("/user", async (req, res) => {
+    const userId = req.body.userId;
+    const data = req.body;
+    try {
+        const user = await User.findByIdAndUpdate({_id: userId}, data, {
+            returnDocument: "before",
+        });
+        console.log(user);
+        if(!user){
+            res.status(400).send("User not found");
+        } else {
+            res.send("User updated successfully");
+        }
+    } catch (err) {
+        res.status(400).send("Something went wrong!");
+    }
+});
+
+
 app.post("/signup", async (req, res) => {
     // Creating a new instance of a user model
     const user = new User(req.body);
