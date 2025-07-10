@@ -23,6 +23,7 @@
   "homepage": "https://github.com/Kautilya-23/TinderBE#readme",
   "dependencies": {
     "express": "^5.1.0",
-    "mongoose": "^8.16.1"
+    "mongoose": "^8.16.1",
+    "validator": "^13.15.15"
   }
 }
